@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Spam Email Classifier</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+<div class="container">
+    <h1>📧 Spam Email Classifier</h1>
+    <p>Model Accuracy: <b>{{ accuracy }}%</b></p>
+
+    <h2>Enter Email Features</h2>
+    <form action="/predict" method="POST">
+        {% for feature in features %}
+            <label>{{ feature }}</label>
+            <input type="number" name="{{ feature }}" required step="any">
+        {% endfor %}
+        <button type="submit">Predict</button>
+    </form>
+</div>
+</body>
+</html>
