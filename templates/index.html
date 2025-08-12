@@ -1,22 +1,31 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Spam Email Classifier</title>
+    <title>Mail Spam Detection</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
 <body>
-<div class="container">
-    <h1>📧 Spam Email Classifier</h1>
-    <p>Model Accuracy: <b>{{ accuracy }}%</b></p>
+    <div class="container">
+        <h1>📧 Mail Spam Detection</h1>
+        <form method="POST">
+            <label>Word Count:</label>
+            <input type="number" name="word_count" required>
 
-    <h2>Enter Email Features</h2>
-    <form action="/predict" method="POST">
-        {% for feature in features %}
-            <label>{{ feature }}</label>
-            <input type="number" name="{{ feature }}" required step="any">
-        {% endfor %}
-        <button type="submit">Predict</button>
-    </form>
-</div>
+            <label>Number of Links:</label>
+            <input type="number" name="num_links" required>
+
+            <label>Contains "Offer":</label>
+            <select name="contains_offer">
+                <option value="1">Yes</option>
+                <option value="0">No</option>
+            </select>
+
+            <button type="submit">Predict</button>
+        </form>
+
+        {% if prediction %}
+            <div class="result">Prediction: {{ prediction }}</div>
+        {% endif %}
+    </div>
 </body>
 </html>
